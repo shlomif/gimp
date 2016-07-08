@@ -299,7 +299,11 @@ static gint
 preview_events (GtkWidget *area,
                 GdkEvent  *event)
 {
+  /* Excluding the pos functionality because what uses it is commented out.
+   * */
+#ifdef WITH_POS
   HVect pos;
+#endif
 /*  HMatrix RotMat;
   gdouble a,b,c; */
 
@@ -313,6 +317,7 @@ preview_events (GtkWidget *area,
 
       case GDK_BUTTON_PRESS:
         light_hit = check_light_hit (event->button.x, event->button.y);
+#ifdef WITH_POS
         if (light_hit == FALSE)
           {
             pos.x = -(2.0 * (gdouble) event->button.x /
@@ -322,6 +327,7 @@ preview_events (GtkWidget *area,
             /*ArcBall_Mouse(pos);
             ArcBall_BeginDrag(); */
           }
+#endif
         left_button_pressed = TRUE;
         break;
 
@@ -332,6 +338,7 @@ preview_events (GtkWidget *area,
 
             gtk_widget_queue_draw (previewarea);
           }
+#ifdef WITH_POS
         else
           {
             pos.x = -(2.0 * (gdouble) event->button.x /
@@ -341,6 +348,7 @@ preview_events (GtkWidget *area,
             /*ArcBall_Mouse(pos);
             ArcBall_EndDrag(); */
           }
+#endif
         left_button_pressed = FALSE;
         break;
 
@@ -356,6 +364,7 @@ preview_events (GtkWidget *area,
                 update_light_pos_entries ();
                 mapvals.livepreview = live;
               }
+#ifdef WITH_POS
             else
               {
                     pos.x = -(2.0 * (gdouble) event->motion.x /
@@ -376,6 +385,7 @@ preview_events (GtkWidget *area,
                 if (Gamma<-180) Gamma+=360;
                       UpdateAngleSliders(); */
               }
+#endif
           }
         break;
 

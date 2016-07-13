@@ -381,7 +381,6 @@ load_image (const gchar  *filename,
       guint16  ctx_us;
       guint8  *value;
       guint32  tag;
-      gboolean do_toggle_endian = FALSE;
       gboolean implicit_encoding = FALSE;
 
       if (fread (&group_word, 1, 2, DICOM) == 0)
@@ -498,13 +497,8 @@ load_image (const gchar  *filename,
             case 0x0010:   /* transfer syntax id */
               if (strcmp("1.2.840.10008.1.2", (char*)value) == 0)
                 {
-                  do_toggle_endian = FALSE;
                   implicit_encoding = TRUE;
                 }
-              else if (strcmp("1.2.840.10008.1.2.1", (char*)value) == 0)
-                do_toggle_endian = FALSE;
-              else if (strcmp("1.2.840.10008.1.2.2", (char*)value) == 0)
-                do_toggle_endian = TRUE;
               break;
             }
         }

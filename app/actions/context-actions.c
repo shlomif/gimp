@@ -1243,6 +1243,10 @@ void
 context_actions_update (GimpActionGroup *group,
                         gpointer         data)
 {
+/* Since the SET_SENSITIVE() calls are disabled there is no point to the rest
+ * of the code and GCC just warns about them.
+ * */
+#if 0
   GimpContext *context   = action_data_get_context (data);
   gboolean     generated = FALSE;
   gdouble      radius    = 0.0;
@@ -1291,4 +1295,5 @@ context_actions_update (GimpActionGroup *group,
 #endif
 
 #undef SET_SENSITIVE
+#endif
 }

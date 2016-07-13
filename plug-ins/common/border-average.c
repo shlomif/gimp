@@ -355,6 +355,14 @@ borderaverage_dialog (gint32        image_ID,
 
   gimp_ui_init (PLUG_IN_BINARY, FALSE);
 
+  {
+    gint x,y;
+    if (! gimp_drawable_mask_intersect (drawable_id, &x, &y, &width, &height))
+      {
+        return FALSE;
+      }
+  }
+
   dialog = gimp_dialog_new (_("Borderaverage"), PLUG_IN_ROLE,
                             NULL, 0,
                             gimp_standard_help_func, PLUG_IN_PROC,

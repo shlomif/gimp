@@ -854,7 +854,6 @@ read_creator_block (FILE     *f,
   gchar        *string;
   gchar        *title = NULL, *artist = NULL, *copyright = NULL, *description = NULL;
   guint32       dword;
-  guint32       cdate = 0, mdate = 0;
   GString      *comment;
   GimpParasite *comment_parasite;
 
@@ -912,13 +911,6 @@ read_creator_block (FILE     *f,
             {
               g_message ("Error reading creator keyword data");
               return -1;
-            }
-          switch (keyword)
-            {
-            case PSP_CRTR_FLD_CRT_DATE:
-              cdate = dword; break;
-            case PSP_CRTR_FLD_MOD_DATE:
-              mdate = dword; break;
             }
           break;
         default:

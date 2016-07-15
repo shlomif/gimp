@@ -794,7 +794,7 @@ load_color_profile (png_structp   pp,
 #if defined(PNG_iCCP_SUPPORTED)
   png_uint_32       proflen;
   png_charp         profname;
-  png_charp         prof;
+  png_bytep         prof;
   int               profcomp;
 
   if (png_get_iCCP (pp, info, &profname, &profcomp, &prof, &proflen))
@@ -1689,7 +1689,7 @@ save_image (const gchar  *filename,
                       info,
                       profile_name ? profile_name : "ICC profile",
                       0,
-                      (png_charp) icc_data,
+                      (png_bytep) icc_data,
                       icc_length);
 
         g_free (profile_name);
